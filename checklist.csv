@@ -1,0 +1,82 @@
+Category,Check,Priority,How to verify
+Crawlability,robots.txt is reachable at /robots.txt and returns 200,High,Fetch https://example.com/robots.txt; check status in GSC > Settings > robots.txt report.
+Crawlability,"robots.txt does not block important sections, CSS or JS",High,Review Disallow rules; test key URLs with GSC URL Inspection and a crawler using robots.txt rules.
+Crawlability,XML sitemap is referenced in robots.txt,Medium,Look for a Sitemap: line in robots.txt.
+Crawlability,XML sitemap(s) submitted in Search Console with no errors,High,"GSC > Sitemaps: status Success, discovered URL counts match expectations."
+Crawlability,"Sitemaps only contain 200, indexable, canonical URLs",High,Crawl the sitemap list mode in Screaming Frog or run sitemap_validator.py.
+Crawlability,No orphan pages (important pages have internal links),Medium,Compare crawl URLs vs sitemap/GA4 URLs; Screaming Frog 'Orphan URLs' report.
+Crawlability,Faceted navigation and URL parameters are controlled,High,Crawl with parameters; check GSC Crawl stats for parameter URLs; review robots/canonical rules.
+Crawlability,Server responds quickly and reliably to Googlebot,Medium,"GSC > Settings > Crawl stats: average response time, host status."
+Crawlability,Pagination links are crawlable <a href> links,Medium,"Disable JS or inspect rendered HTML for real href links to page 2, 3, ..."
+Indexation,Important pages are indexed,High,GSC > Pages report; URL Inspection on key templates.
+Indexation,No accidental noindex on important pages,High,Crawl and filter on meta robots and X-Robots-Tag containing noindex.
+Indexation,"Canonical tags are present, absolute and self-referencing on canonical pages",High,Crawl and compare canonical vs page URL; check for relative or missing canonicals.
+Indexation,Canonical targets return 200 and are indexable,High,Crawl canonical targets; Screaming Frog 'Canonicals' tab.
+Indexation,"Duplicate content variants consolidated (http/https, www/non-www, trailing slash, case)",High,Request each variant and confirm a single 301 to the preferred version.
+Indexation,"Thin, low-value or empty pages are noindexed or improved",Medium,"Crawl word count, GA4 engagement, GSC impressions per URL."
+Indexation,Google-selected canonical matches user-declared canonical,Medium,URL Inspection: 'User-declared canonical' vs 'Google-selected canonical'.
+Indexation,Internal search result pages are not indexable,Medium,Check /search?q= style URLs for noindex or robots disallow.
+Rendering & JavaScript,Main content is present in the rendered HTML,High,GSC URL Inspection > View crawled page > HTML; compare with browser.
+Rendering & JavaScript,Critical content and links do not depend on user events,High,"Check that tabs, accordions and menus have content in the DOM on load."
+Rendering & JavaScript,"Title, meta description, canonical and robots are in the initial HTML",High,View source (not inspect element) and confirm tags exist.
+Rendering & JavaScript,JS and CSS files return 200 and are not blocked,High,URL Inspection > More info > Page resources; crawler with JS rendering.
+Rendering & JavaScript,Internal links use <a href> with real URLs,High,Crawl with JS rendering; inspect link elements in templates.
+Rendering & JavaScript,No reliance on URL fragments (#) for unique content,Medium,Check SPA routing uses the History API with real paths.
+Rendering & JavaScript,Server-side rendering or static generation for key templates,Medium,Compare raw HTML vs rendered HTML word count for key templates.
+Rendering & JavaScript,Soft 404s handled correctly in client-side apps,Medium,Request a nonsense URL and confirm a real 404 status or noindex.
+Site Architecture & Internal Linking,Important pages are within 3 clicks of the homepage,High,Crawler 'Crawl depth' report.
+Site Architecture & Internal Linking,Logical URL structure that mirrors the site hierarchy,Medium,Review URL patterns per template (e.g. /services/seo/dubai/).
+Site Architecture & Internal Linking,Breadcrumbs present on deep templates (with BreadcrumbList schema),Medium,Check templates and Rich Results Test.
+Site Architecture & Internal Linking,Descriptive anchor text on internal links,Medium,Crawler 'Inlinks' anchor text export; avoid 'click here'.
+Site Architecture & Internal Linking,No internal links to redirects or 4xx pages,High,Crawl and filter internal links by status code 3xx/4xx.
+Site Architecture & Internal Linking,Key money pages receive the most internal links,Medium,Compare unique inlinks per URL against business priorities.
+Site Architecture & Internal Linking,Hub/category pages link to all relevant children,Medium,Manual template review; crawl graph visualisation.
+Site Architecture & Internal Linking,Navigation and footer links are crawlable and not bloated,Low,Count links per page; review nav markup.
+Core Web Vitals,LCP is 2.5s or less at the 75th percentile,High,GSC > Core Web Vitals; PageSpeed Insights field data (CrUX).
+Core Web Vitals,INP is 200ms or less at the 75th percentile,High,CrUX / PageSpeed Insights; Chrome DevTools Performance panel.
+Core Web Vitals,CLS is 0.1 or less at the 75th percentile,High,CrUX / PageSpeed Insights; Layout Shift regions in DevTools.
+Core Web Vitals,LCP image is not lazy-loaded and is prioritised,Medium,Check for loading=lazy on the LCP element; consider fetchpriority=high.
+Core Web Vitals,"Images are compressed, sized and served in modern formats",Medium,Lighthouse 'Properly size images' and 'Serve images in next-gen formats'.
+Core Web Vitals,"Width and height (or aspect-ratio) set on images, ads and embeds",Medium,Inspect markup; Lighthouse CLS diagnostics.
+Core Web Vitals,Render-blocking CSS/JS minimised; third-party scripts audited,Medium,Lighthouse opportunities; Coverage tab in DevTools.
+Core Web Vitals,Server response time (TTFB) is under ~800ms,Medium,PageSpeed Insights TTFB; WebPageTest.
+Mobile,Site is responsive and uses a correct viewport meta tag,High,"Check for <meta name=viewport content='width=device-width, initial-scale=1'>."
+Mobile,Mobile and desktop serve the same primary content,High,Compare rendered mobile vs desktop HTML for key templates.
+Mobile,"Structured data, meta tags and links match on mobile",High,URL Inspection with smartphone Googlebot.
+Mobile,Tap targets and font sizes are usable,Medium,Lighthouse accessibility/best practices; manual check on devices.
+Mobile,No intrusive interstitials on landing,Medium,Load key pages on a phone from a search result.
+Mobile,RTL layouts render correctly for Arabic pages,Medium,Test dir='rtl' pages on real devices and browsers.
+Structured Data,JSON-LD is valid and parses without errors,High,Schema.org validator; validate_schema.py; Rich Results Test.
+Structured Data,Organization and WebSite schema on the homepage,Medium,Inspect homepage JSON-LD.
+Structured Data,"Template-appropriate types used (Product, Article, LocalBusiness, FAQPage, BreadcrumbList)",Medium,Rich Results Test per template.
+Structured Data,Markup matches visible on-page content,High,Manual comparison of schema values vs page text.
+Structured Data,Required and recommended properties are filled,Medium,GSC Enhancements reports; validate_schema.py.
+Structured Data,No errors in Search Console enhancement reports,Medium,GSC > Enhancements / Shopping / Merchant listings.
+International SEO,hreflang annotations present for every language/region version,High,Crawl hreflang; run hreflang_checker.py.
+International SEO,All hreflang annotations have return links,High,hreflang_checker.py 'missing return link' column.
+International SEO,Each page includes a self-referencing hreflang,High,Check that the page URL appears in its own hreflang set.
+International SEO,Language and region codes are valid (ISO 639-1 + ISO 3166-1 Alpha-2),High,"Validate codes; correct examples: en-gb, ar-sa, en-ae."
+International SEO,x-default defined for language selector or global fallback,Medium,Look for hreflang='x-default'.
+International SEO,"hreflang URLs are canonical, indexable and return 200",High,hreflang_checker.py target status column; compare with canonicals.
+International SEO,"Content is actually localised (language, currency, phone, address)",Medium,"Manual review of AED vs SAR pricing, local contact details."
+International SEO,No automatic IP-based redirects that block crawlers,High,Request regional URLs with a US IP / Googlebot UA and confirm access.
+International SEO,html lang and dir attributes are set correctly,Low,Inspect <html lang='ar-SA' dir='rtl'>.
+Redirects & Status Codes,Permanent moves use 301 or 308,High,status_code_checker.py; crawler response codes.
+Redirects & Status Codes,No redirect chains longer than one hop,High,status_code_checker.py 'hops' column.
+Redirects & Status Codes,No redirect loops,High,Crawler redirect chain report.
+Redirects & Status Codes,Removed pages return 404 or 410 (not 200 or homepage redirect),Medium,Spot-check removed URLs; GSC Soft 404 report.
+Redirects & Status Codes,Custom 404 page is helpful and returns a real 404 status,Medium,Request a nonsense URL and check status and content.
+Redirects & Status Codes,Migrations have a complete redirect map,High,Crawl old URL list and confirm each 301s to the correct new URL.
+Redirects & Status Codes,5xx errors are monitored and rare,High,GSC Crawl stats by response; server monitoring.
+Log File Analysis,"Server logs available and include user agent, status, URL and timestamp",Medium,"Request access logs from hosting/CDN (Cloudflare, Akamai, Nginx)."
+Log File Analysis,Googlebot hits verified via reverse DNS,Medium,"Reverse DNS to googlebot.com / google.com, then forward-confirm."
+Log File Analysis,Crawl budget is spent on important sections,Medium,Group log hits by folder/template; compare with priority pages.
+Log File Analysis,Important pages are crawled regularly,Medium,Find priority URLs with zero Googlebot hits in the last 30 days.
+Log File Analysis,Crawled 3xx/4xx/5xx URLs are identified and fixed,Medium,Filter log hits by status code.
+Log File Analysis,"AI and other crawlers are identified (GPTBot, ClaudeBot, PerplexityBot, etc.)",Low,Filter logs by known AI crawler user agents.
+Security (HTTPS),Entire site served over HTTPS with a valid certificate,High,Check certificate validity and expiry; SSL Labs test.
+Security (HTTPS),HTTP redirects to HTTPS with a single 301,High,Request http:// URLs and check the redirect.
+Security (HTTPS),No mixed content,Medium,Browser console; crawler 'Insecure content' report.
+Security (HTTPS),HSTS header enabled,Low,Check Strict-Transport-Security response header.
+Security (HTTPS),"Canonicals, hreflang, sitemaps and internal links use HTTPS URLs",Medium,Crawl and search for 'http://' in these elements.
+Security (HTTPS),"No hacked content, spam pages or security issues flagged",High,GSC > Security & Manual Actions; site:example.com spam queries.
