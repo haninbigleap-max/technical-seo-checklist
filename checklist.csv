@@ -52,12 +52,12 @@ Structured Data,"Template-appropriate types used (Product, Article, LocalBusines
 Structured Data,Markup matches visible on-page content,High,Manual comparison of schema values vs page text.
 Structured Data,Required and recommended properties are filled,Medium,GSC Enhancements reports; validate_schema.py.
 Structured Data,No errors in Search Console enhancement reports,Medium,GSC > Enhancements / Shopping / Merchant listings.
-International SEO,hreflang annotations present for every language/region version,High,Crawl hreflang; run hreflang_checker.py.
-International SEO,All hreflang annotations have return links,High,hreflang_checker.py 'missing return link' column.
+International SEO,hreflang annotations present for every language/region version,High,Crawl with hreflang extraction enabled (e.g. Screaming Frog Hreflang tab).
+International SEO,All hreflang annotations have return links,High,Crawler hreflang report: 'Missing return links' filter.
 International SEO,Each page includes a self-referencing hreflang,High,Check that the page URL appears in its own hreflang set.
 International SEO,Language and region codes are valid (ISO 639-1 + ISO 3166-1 Alpha-2),High,"Validate codes; correct examples: en-gb, ar-sa, en-ae."
 International SEO,x-default defined for language selector or global fallback,Medium,Look for hreflang='x-default'.
-International SEO,"hreflang URLs are canonical, indexable and return 200",High,hreflang_checker.py target status column; compare with canonicals.
+International SEO,"hreflang URLs are canonical, indexable and return 200",High,Crawler hreflang report: non-200 and non-canonical hreflang URLs.
 International SEO,"Content is actually localised (language, currency, phone, address)",Medium,"Manual review of AED vs SAR pricing, local contact details."
 International SEO,No automatic IP-based redirects that block crawlers,High,Request regional URLs with a US IP / Googlebot UA and confirm access.
 International SEO,html lang and dir attributes are set correctly,Low,Inspect <html lang='ar-SA' dir='rtl'>.

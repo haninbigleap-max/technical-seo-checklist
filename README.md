@@ -67,7 +67,7 @@ A row from `checklist.csv`:
 
 | Category | Check | Priority | How to verify |
 |---|---|---|---|
-| International SEO | All hreflang annotations have return links | High | hreflang_checker.py 'missing return link' column. |
+| International SEO | All hreflang annotations have return links | High | Crawler hreflang report: 'Missing return links' filter. |
 
 An item from `checklist.md`:
 
@@ -80,7 +80,6 @@ An item from `checklist.md`:
 
 Several checks can be automated with my other repositories:
 
-- [hreflang-audit](https://github.com/haninbigleap-max/hreflang-audit) for the International SEO section
 - [seo-automation](https://github.com/haninbigleap-max/seo-automation) for status codes, sitemaps and meta tags
 - [schema-testing](https://github.com/haninbigleap-max/schema-testing) for structured data
 
